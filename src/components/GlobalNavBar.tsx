@@ -1,12 +1,4 @@
-import {
-  ButtonGroup,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  UncontrolledDropdown,
-} from "reactstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { AUTH_LIST } from "../constants/auths";
 import { GNB_BUTTON_LIST } from "../constants/buttons";
 import authAtom from "../recoil/authAtom";
 import GNBIndexAtom from "../recoil/GNBIndexAtom";
@@ -29,7 +21,7 @@ export function GlobalNavBar() {
             return (
               <GNBButton
                 buttonText={item}
-                key={index}
+                key={`GNB_${index}`}
                 active={GNBIndex === index ?? false}
                 onClick={() => setGNBIndex(index)}
                 buttonId={`button-${index}`}
