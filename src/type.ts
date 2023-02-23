@@ -3,3 +3,13 @@ export enum Auth {
     user,  // 매니저
     guest  // 뷰어
 }
+
+export interface IGNBButtonProps {
+    buttonText : string
+    active : boolean
+    onClick : () => void
+}
+
+export interface IGNBIndex {
+    index : number
+}

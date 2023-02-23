@@ -3,7 +3,6 @@ import { Auth } from "../../type"
 
 export const authAtom = atom({
   key: "authAtom",
-  default: {
-    level: Auth.guest
-  }
+  default: 
+    Auth.guest
 })

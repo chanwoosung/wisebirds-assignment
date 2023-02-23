@@ -1,7 +1,7 @@
 import { atom } from "recoil"
 
 export const userAtom = atom({
-  key: "authAtom",
+  key: "userAtom",
   default: {
     name: "홍길동",
     email: "abc@abc.com",
