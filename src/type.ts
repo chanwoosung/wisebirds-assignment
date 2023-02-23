@@ -8,6 +8,8 @@ export interface IGNBButtonProps {
     buttonText : string
     active : boolean
     onClick : () => void
+    type: "title" | "GNB" | "user"
+    buttonId: string
 }
 
 export interface IGNBIndex {
