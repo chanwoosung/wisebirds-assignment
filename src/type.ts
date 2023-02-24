@@ -21,20 +21,38 @@ export interface IBaseResponse<T> {
     size: number
     total_elements:number
     total_pages: number 
+    last?: boolean
+    number?: number
+    first?: boolean
+    empty?: boolean
+    number_of_elements?:number
 }
 
-export interface IGetCampaignDataRequestParams {
+export interface IGetRequestParams {
     page:number
     size:number
 }
 export interface IGetCampaignData {
     id:number
-    name: string,
-    enabled:boolean,
-    campaign_objective:string,
-    impressions:number,
-    clicks:number,
-    ctr:number,
-    video_views:number,
+    name: string
+    enabled:boolean
+    campaign_objective:CampaignObjectiveType
+    impressions:number
+    clicks:number
+    ctr:number
+    video_views:number
     vtr:number
 }
+export interface IGetUserData {
+    id:number
+    name: string
+    email:string
+    last_login_at:string
+}
+export type CampaignObjectiveType = "WEBSITE_CONVERSIONS" |
+"WEBSITE_TRAFFIC"|
+"SALES"|
+"APP_INSTALLATION"|
+"LEAD"|
+"BRAND"|
+"VIDEO_VIEWS"
