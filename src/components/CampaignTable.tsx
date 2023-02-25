@@ -5,11 +5,9 @@ import {
   Form,
   FormGroup,
   Input,
-  Label,
   Pagination,
   PaginationItem,
   PaginationLink,
-  Spinner,
   Table,
 } from "reactstrap";
 import { useRecoilValue } from "recoil";
@@ -24,7 +22,11 @@ export function CampaignTable() {
   const queryClient = useQueryClient();
   const { search } = useLocation();
   const urlParams = new URLSearchParams(search);
-  const { data: campaignData, status } = useGetCampaignData("getCampaignData", {
+  const {
+    data: campaignData,
+    status,
+    isError,
+  } = useGetCampaignData("getCampaignData", {
     page: urlParams.get("page") ? Number(urlParams.get("page")) : 1,
     size: 25,
   });

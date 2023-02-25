@@ -15,6 +15,8 @@ export const getUserData = async (
 
     return data
   } catch (error) {
+    throw error
+  } finally {
     return userData
   }
 
@@ -27,4 +29,10 @@ export const useGetUserData = (
   useQuery(
     [ queryKey, { ...params}],
     () => getUserData(params),
+    {
+      onError(err) {
+      },
+      onSettled(data) {
+      }
+    }
   )

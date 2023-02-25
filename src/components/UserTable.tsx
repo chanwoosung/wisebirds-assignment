@@ -9,50 +9,30 @@ import {
   Table,
 } from "reactstrap";
 import { USER_TABLE_HEADER } from "../constants/tables";
+import { useErrorModal } from "../hooks/useErrorModal";
 import { useGetUserData } from "../services/user/getUserData";
 import { IGetUserData } from "../type";
 import { formatDateTime } from "../util/formatDateTime";
+import { ErrorModal } from "./ErrorModal";
 import { UserModal } from "./UserModal";
 
 export function UserTable() {
-  const queryClient = useQueryClient();
   const { search } = useLocation();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState<undefined | IGetUserData>(
     undefined
   );
+  const [isOpenErrorModal, setIsOpenErrorModal] = useErrorModal();
   const urlParams = new URLSearchParams(search);
-  const { data: userData, status } = useGetUserData("getUserData", {
+  const {
+    data: userData,
+    status,
+    isError,
+  } = useGetUserData("getUserData", {
     page: urlParams.get("page") ? Number(urlParams.get("page")) : 1,
     size: 25,
   });
-  // const { mutate } = useMutation(patchCampaignState, {
-  //   onSettled(data, error, variables, context) {
-  //     const newCampaignData = userData?.content.map((user) =>
-  //       user.id === variables.id
-  //         ? {
-  //             ...user,
-  //             id: variables.id,
-  //             enabled: variables.enabled,
-  //           }
-  //         : user
-  //     );
-  //     queryClient.setQueryData<IBaseResponse<IGetCampaignData>>(
-  //       [
-  //         "getCampaignData",
-  //         {
-  //           page: Number(urlParams.get("page")) ?? 1,
-  //           size: 25,
-  //         },
-  //       ],
-  //       () =>
-  //         ({
-  //           ...userData,
-  //           content: newCampaignData,
-  //         } as IBaseResponse<IGetUserData>)
-  //     );
-  //   },
-  // });
+
   const handleOpenModal = (user?: IGetUserData) => {
     setIsOpenModal(true);
     setSelectedUser(user);
@@ -60,7 +40,7 @@ export function UserTable() {
   const toggleModal = () => {
     setIsOpenModal(!isOpenModal);
   };
-  console.log(userData);
+  console.log(status, isError);
   return (
     <>
       <Button className="bg-bgSelectBlue" onClick={() => handleOpenModal()}>
