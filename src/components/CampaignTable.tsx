@@ -25,7 +25,7 @@ export function CampaignTable() {
   const { search } = useLocation();
   const urlParams = new URLSearchParams(search);
   const { data: campaignData, status } = useGetCampaignData("getCampaignData", {
-    page: Number(urlParams.get("page")) ?? 1,
+    page: urlParams.get("page") ? Number(urlParams.get("page")) : 1,
     size: 25,
   });
   const { mutate } = useMutation(patchCampaignState, {

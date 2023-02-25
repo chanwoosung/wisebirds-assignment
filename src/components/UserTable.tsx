@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useLocation } from "react-router-dom";
 import {
@@ -12,13 +12,18 @@ import { USER_TABLE_HEADER } from "../constants/tables";
 import { useGetUserData } from "../services/user/getUserData";
 import { IGetUserData } from "../type";
 import { formatDateTime } from "../util/formatDateTime";
+import { UserModal } from "./UserModal";
 
 export function UserTable() {
   const queryClient = useQueryClient();
   const { search } = useLocation();
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<undefined | IGetUserData>(
+    undefined
+  );
   const urlParams = new URLSearchParams(search);
   const { data: userData, status } = useGetUserData("getUserData", {
-    page: Number(urlParams.get("page")) ?? 1,
+    page: urlParams.get("page") ? Number(urlParams.get("page")) : 1,
     size: 25,
   });
   // const { mutate } = useMutation(patchCampaignState, {
@@ -48,12 +53,24 @@ export function UserTable() {
   //     );
   //   },
   // });
-  const handleOpenModal = (user?: IGetUserData) => {};
+  const handleOpenModal = (user?: IGetUserData) => {
+    setIsOpenModal(true);
+    setSelectedUser(user);
+  };
+  const toggleModal = () => {
+    setIsOpenModal(!isOpenModal);
+  };
+  console.log(userData);
   return (
     <>
       <Button className="bg-bgSelectBlue" onClick={() => handleOpenModal()}>
         생성
       </Button>
+      <UserModal
+        isOpen={isOpenModal}
+        toggle={toggleModal}
+        user={selectedUser}
+      />
       <Table>
         <thead>
           <tr>
@@ -71,7 +88,14 @@ export function UserTable() {
                     <th scope="row">{user.email}</th>
                     <td>{user.name}</td>
                     <td>{formatDateTime(user.last_login_at)}</td>
-                    <td>수정</td>
+                    <td>
+                      <Button
+                        className="bg-slate-500"
+                        onClick={() => handleOpenModal(user)}
+                      >
+                        수정
+                      </Button>
+                    </td>
                   </tr>
                 </Fragment>
               );

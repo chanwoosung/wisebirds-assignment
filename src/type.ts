@@ -49,6 +49,19 @@ export interface IGetUserData {
     email:string
     last_login_at:string
 }
+export interface IUserModalProps {
+    isOpen: boolean
+    toggle: ()=> void
+    user?:IGetUserData
+}
+
+export interface IUserModalForm {
+    inputId:string
+    inputPW: string
+    inputConfirmPW: string
+    inputName:string
+}
+
 export type CampaignObjectiveType = "WEBSITE_CONVERSIONS" |
 "WEBSITE_TRAFFIC"|
 "SALES"|
