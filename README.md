@@ -1,46 +1,33 @@
-# Getting Started with Create React App
+# WiseBirds front-end development assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 프로젝트 확인법
 
-## Available Scripts
+### yarn
 
-In the project directory, you can run:
+`yarn` 을 통해 node module 설치 부탁드립니다.
 
-### `yarn start`
+### yarn start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`yarn start` 를 통해 화면을 시동시킬 수 있습니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 개발 구현 중 중점적으로 집중한 사항
 
-### `yarn test`
+API가 구현되어 있지 않다는 가정하에, `React-Query` 등을 사용한 데이터 처리와 이에 대한 인터렉션을 집중하며 만들었습니다.
+`Mutation` 을 통해 데이터가 수정되었다고 가정하여, 즉각적으로 화면에 데이터가 반영되는 것을 목표로 제작했습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 시나리오
 
-### `yarn build`
+맨 처음 화면에서 권한이 뷰어로 되어있습니다. GNB영역에서 권한을 수정해주시기 바랍니다.
+사용자 관리 탭은 어드민으로 설정하셔야지만 가능합니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 개발 미구현 사항
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 사용자 호출 기능
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`GNB` 영역의 데이터를 호출하는 건가 싶어서 애매하여 api scheme은 있었으나 구현하지 않았습니다.
 
-### `yarn eject`
+### 에러 핸들링
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+프로젝트 내부에 제시해주셨던 기본 데이터를 호출 후 finally에서 리턴하는 형태로 제작이 되어서 그런지
+react-query `onError`, `onSettle` 옵션이 작동하지 않았습니다.
+에러 바운더리에 의한 Error 처리를 구현하지 못했습니다.
